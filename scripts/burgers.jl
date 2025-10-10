@@ -32,7 +32,7 @@ r = 12
 ## Compute the SVD ##
 #===================#
 sketchy = SketchySVD.init_sketchy(
-    m=m, n=n, r=r, ReduxMap=:Sparse, ErrorEstimate=true, SpectralDecay=true,
+    m=m, n=n, r=r, ReduxMap=:sparse, ErrorEstimate=true, SpectralDecay=true,
     verbose=true
 )
 ees, scree = SketchySVD.full_increment!(sketchy, X, terminate=true)

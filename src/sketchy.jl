@@ -77,7 +77,7 @@ function init_sketchy(;
     s::Integer=0,              # core dimension for sketching
     q::Integer=0,              # error dimension for sketching
     T::Real=0,                 # storage budget for sketching
-    ReduxMap::Symbol=:Sparse,  # type of reduction map for sketching
+    ReduxMap::Symbol=:sparse,  # type of reduction map for sketching
     dtype::String="real",      # data type for the data
     verbose::Bool=false,       # verbosity flag
     ErrorEstimate::Bool=false, # flag to estimate the error
@@ -111,19 +111,19 @@ function init_sketchy(;
     theta_flag = ErrorEstimate || SpectralDecay
 
     # Initialize the random matrices (algorithm 4.1 in [TYUC2019])
-    if ReduxMap == :Gauss
+    if ReduxMap == :gauss
         Ξ = Gauss(k, m, field=dtype)
         Ω = Gauss(k, n, field=dtype)
         Φ = Gauss(s, m, field=dtype)
         Ψ = Gauss(s, n, field=dtype)
         Θ = theta_flag ? Gauss(q, m, field=dtype) : nothing
-    elseif ReduxMap == :SSRFT
+    elseif ReduxMap == :ssrft
         Ξ = SSRFT(k, m, field=dtype)
         Ω = SSRFT(k, n, field=dtype)
         Φ = SSRFT(s, m, field=dtype)
         Ψ = SSRFT(s, n, field=dtype)
         Θ = theta_flag ? Gauss(q, m, field=dtype) : nothing # always Gaussian
-    elseif ReduxMap == :Sparse
+    elseif ReduxMap == :sparse
         Ξ = Sparse(k, m, field=dtype)
         Ω = Sparse(k, n, field=dtype)
         Φ = Sparse(s, m, field=dtype)
@@ -131,7 +131,7 @@ function init_sketchy(;
         Θ = theta_flag ? Gauss(q, m, field=dtype) : nothing # always Gaussian
     else
         error("Invalid reduction map. Available options are " *
-              ":Gauss, :SSRFT, and :Sparse.")
+              ":gauss, :ssrft, and :sparse.")
     end
 
     # Initialize the sketches

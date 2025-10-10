@@ -31,7 +31,7 @@ X = randn(m, n)
 ## Compute the SVD ##
 #===================#
 sketchy = SketchySVD.init_sketchy(
-    m=m, n=n, r=r, ReduxMap=:Gauss, ErrorEstimate=true, SpectralDecay=true,
+    m=m, n=n, r=r, ReduxMap=:gauss, ErrorEstimate=true, SpectralDecay=true,
     verbose=true
 )
 ees, scree = SketchySVD.full_increment!(sketchy, X, terminate=true)
