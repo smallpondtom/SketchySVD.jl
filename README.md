@@ -85,47 +85,6 @@ finalize!(sketchy)
 println("Top 5 singular values: ", sketchy.Σ[1:5])
 ```
 
-## API Reference
-
-### Main Functions
-
-#### `init_sketchy(A, r; method=:gauss, oversampling=10)`
-
-Initialize a sketchy SVD object.
-
-**Arguments:**
-- `A`: Input matrix (m × n)
-- `r`: Target rank for approximation
-- `method`: Sketching method (`:gauss`, `:sparse`, or `:ssrft`)
-- `oversampling`: Additional dimensions for accuracy (default: 10)
-
-**Returns:** `Sketchy` object
-
-#### `increment!(sketchy, A; full=false)`
-
-Incrementally update the sketch with matrix A.
-
-**Arguments:**
-- `sketchy`: Sketchy SVD object
-- `A`: Matrix to incorporate
-- `full`: If true, performs full increment; if false, uses efficient update
-
-#### `finalize!(sketchy)`
-
-Compute final SVD from the sketch.
-
-**Arguments:**
-- `sketchy`: Sketchy SVD object
-
-**Returns:** Updates `sketchy` with fields:
-- `.V`: Left singular vectors (m × r)
-- `.Σ`: Singular values (length r)
-- `.W`: Right singular vectors (n × r)
-
-#### `dump!(sketchy, filename)`
-
-Save the current state of the sketchy SVD object.
-
 ## Sketching Methods
 
 ### Gaussian Random Projection (`:gauss`)
@@ -143,7 +102,7 @@ Leverages FFT for fast random projections. Most efficient for structured matrice
 2. **Adjust oversampling**: Increase for better accuracy, decrease for speed
 3. **Select optimal method**: 
    - Use `:ssrft` for structured/large matrices
-   - Use `:sparse` for very sparse data
+   - Use `:sparse` for very large data
    - Use `:gauss` for general matrices
 4. **Batch processing**: Use incremental updates for streaming data
 
