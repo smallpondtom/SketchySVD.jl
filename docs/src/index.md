@@ -2,7 +2,7 @@
 
 *Fast, memory-efficient streaming SVD for Julia*
 
-[![Build Status](https://github.com/smallpondtom/SketchySVD.jl/workflows/CI/badge.svg?branch=main)](https://github.com/username/SketchySVD.jl/actions)
+[![Build Status](https://github.com/smallpondtom/SketchySVD.jl/actions/workflows/CI/badge.svg?branch=main)](https://github.com/smallpondtom/SketchySVD.jl/actions/workflows/CI.yml)
 [![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://username.github.io/SketchySVD.jl/stable/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
