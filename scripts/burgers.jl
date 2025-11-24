@@ -7,11 +7,10 @@ Test SketchySVD algorithm with 1D viscous Burgers' equation data.
 #=================#
 using CairoMakie
 using CSV
-using LinearAlgebra
 using DataFrames
-using Revise
-using Test
+using LinearAlgebra
 using SketchySVD
+using Test
 
 #=============#
 ## Constants ##

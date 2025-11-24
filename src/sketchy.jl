@@ -99,8 +99,8 @@ function init_sketchy(;
         q = iszero(q) ? m : q
     else  # using the budget T (refer to equations 5.5 and 5.6 in [TYUC2019])
         if iszero(k) || iszero(s)
-            k = floor((sqrt((m + n + 4*α)^2 + 16*(T - α^2)) - (m + n + 4*α)) / 8)
-            s = floor(sqrt(T - k*(m + n)))
+            k = floor(Int, (sqrt((m + n + 4*α)^2 + 16*(T - α^2)) - (m + n + 4*α)) / 8)
+            s = floor(Int, sqrt(T - k*(m + n)))
         end
         q = iszero(q) ? m : q
     end

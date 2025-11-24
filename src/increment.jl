@@ -355,6 +355,6 @@ function full_increment!(sketchy::Sketchy{T}, X::AbstractArray{T1},
         est_err_squared, scree = finalize!(sketchy)
         return (est_err_squared=est_err_squared, scree=scree, runtime=t)
     else
-        return (runtime=t)
+        return (runtime=t,)  # Note the comma to make it a NamedTuple
     end
 end

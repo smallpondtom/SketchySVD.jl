@@ -72,5 +72,3 @@ scatterlines!(ax, 1:r, Σ, color=:black, linewidth=3, label="SVD")
 scatterlines!(ax, 1:r, sketchy.Σ, color=:red, linewidth=2, linestyle=:dash, label="iSVD")
 axislegend(ax, labelsize=20, position=:rt)
 display(fig1)
-
-## Plot the scree plot 

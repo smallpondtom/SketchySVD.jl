@@ -60,6 +60,12 @@
         A_approx6 = U6 * Diagonal(S6) * V6'
         rel_error6 = norm(A - A_approx6) / norm(A)
         @test rel_error6 < tol * 2
+
+        # Sparse 
+        U6, S6, V6 = rsvd(A, k, p=10, q=1, rng=sparse_rng)
+        A_approx6 = U6 * Diagonal(S6) * V6'
+        rel_error6 = norm(A - A_approx6) / norm(A)
+        @test rel_error6 < tol * 2
     end
     
     @testset "rsvd_transpose for Tall-Thin Matrices" begin

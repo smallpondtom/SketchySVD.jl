@@ -20,8 +20,9 @@ include("finalize.jl")
 include("rsvd.jl")
 
 export Sketchy 
-export init_sketchy, increment!, dump!, finalize!, full_increment! 
+export init_sketchy, increment!, dump!, finalize!, full_increment!
 export rsvd, rsvd_adaptive
-export gaussian_rng, uniform_rng, sparse_gaussian_rng, rademacher_rng, srft_rng
+export gaussian_rng, uniform_rng, sparse_gaussian_rng
+export sparse_rng, rademacher_rng, srft_rng
 
 end # module SketchySVD

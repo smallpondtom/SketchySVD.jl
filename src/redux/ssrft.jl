@@ -252,14 +252,15 @@ end
 # end
 
 function RightApply(obj::SSRFT{T}, M::AbstractMatrix{T2}) where {T<:Number, T2<:Number}
+    p = size(M,1)
     k, n = obj.k, obj.n
     # M is presumably (?), so that we produce something shaped (?,?,?)
     # Original code: B is (k, n), then B[:, obj.coords] = M
     # So if M is (k, someP), then obj.coords must have length `someP`.
-    @assert size(M,1) == k "M must have k rows for RightApply"
+    @assert size(M,2) == k "M must have k columns for RightApply"
     @assert length(obj.coords) == size(M,2) "Mismatch with obj.coords"
 
-    B = zeros(T, k, n)
+    B = zeros(T, p, n)
     B[:, obj.coords] = M
 
     if isreal(obj)

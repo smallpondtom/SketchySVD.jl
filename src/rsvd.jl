@@ -312,7 +312,8 @@ end
 
 # Matrix-vector multiplication: SRFT * v where v has length n_in
 function Base.:*(S::SRFTMatrix, v::AbstractVector)
-    @assert length(v) == S.n_in "Vector length $(length(v)) must match matrix columns $(S.n_in)"
+    @assert length(v) == S.n_in (
+        "Vector length $(length(v)) must match matrix columns $(S.n_in)")
     
     # Step 1: Apply diagonal scaling D
     dv = S.d .* v
@@ -342,7 +343,8 @@ end
 
 # Matrix-matrix multiplication: SRFT * M where M has n_in rows
 function Base.:*(S::SRFTMatrix, M::AbstractMatrix)
-    @assert size(M, 1) == S.n_in "Matrix rows $(size(M, 1)) must match SRFT columns $(S.n_in)"
+    @assert size(M, 1) == S.n_in (
+        "Matrix rows $(size(M, 1)) must match SRFT columns $(S.n_in)")
     
     n_cols = size(M, 2)
     
@@ -384,4 +386,36 @@ function Base.Matrix(S::SRFTMatrix)
         return real(result)
     end
     return result
+end
+
+"""
+    sparse_rng(m, n; zeta=8, field="real")
+
+Sparse random matrix generator based on the Sparse dimension reduction structure.
+Creates a sparse matrix with approximately `zeta` non-zero entries per column,
+where each entry is randomly ±1 (real) or a complex sign.
+
+This is more efficient than dense Gaussian matrices and is particularly useful
+for large-scale randomized SVD computations.
+
+# Arguments
+- `m::Int`: Number of rows (output dimension)
+- `n::Int`: Number of columns (input dimension)
+
+# Keyword Arguments
+- `zeta::Int=8`: Number of non-zero entries per column (default: 8, clamped to min(m,8))
+- `field::String="real"`: "real" for ±1 entries, "complex" for complex unit entries
+
+# Returns
+- `Sparse`: sparse dimension reduction object
+
+# Notes
+- Returns a dense matrix for compatibility with existing rsvd code
+- For very large problems, consider using the `Sparse` object directly with
+  `LeftApply` or `RightApply` for memory efficiency
+- The sparsity pattern is random with `zeta` non-zeros per column
+"""
+function sparse_rng(m::Int, n::Int; zeta::Int=8, field::String="real")
+    # Create a Sparse object
+    return Sparse(m, n; zeta=zeta, field=field)
 end
