@@ -14,9 +14,9 @@ StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
 FFTW = "1.10.0"
-LinearAlgebra = "1.11.0"
+LinearAlgebra = "1.11.0, 1.12.0"
 MKLSparse = "3.0.0"
 ProgressMeter = "1.11.0"
 Random = "1.11.0"
-SparseArrays = "1.11.0"
-StatsBase = "0.34.6"
+SparseArrays = "1.11.0, 1.12.0"
+StatsBase = "0.34, 0.35"
