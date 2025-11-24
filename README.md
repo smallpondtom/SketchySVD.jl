@@ -9,6 +9,7 @@ https://github.com/smallpondtom/SketchySVD.jl/graphs/contributors)
 https://github.com/smallpondtom/SketchySVD.jl/blob/main/license.txt)
 [![Doc](https://img.shields.io/badge/docs-stable-blue.svg)](https://smallpondtom.github.io/SketchySVD.jl/stable)
 [![Doc](https://img.shields.io/badge/docs-dev-green.svg)](https://smallpondtom.github.io/SketchySVD.jl/dev)
+[![codecov](https://codecov.io/gh/smallpondtom/SketchySVD.jl/graph/badge.svg?token=0MTKW5E0KF)](https://codecov.io/gh/smallpondtom/SketchySVD.jl)
 
 ## Features
 
