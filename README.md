@@ -2,7 +2,7 @@
 
 A Julia package for computing randomized Singular Value Decomposition (SVD) using sketching techniques. This package implements efficient algorithms for approximating the SVD of large matrices by using random projections to reduce dimensionality before performing the decomposition, specifically in the data-streaming setting.
 
-[![Build Status](https://github.com/smallpondtom/SketchySVD.jl/actions/workflows/CI/badge.svg?branch=main)](https://github.com/smallpondtom/SketchySVD.jl/actions/workflows/CI.yml)
+[![Build Status](https://github.com/smallpondtom/SketchySVD.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/smallpondtom/SketchySVD.jl/actions/workflows/CI.yml)
 [![Contributors](https://img.shields.io/github/contributors/smallpondtom/SketchySVD.jl)](
 https://github.com/smallpondtom/SketchySVD.jl/graphs/contributors)
 [![License](https://img.shields.io/github/license/smallpondtom/SketchySVD.jl)](
