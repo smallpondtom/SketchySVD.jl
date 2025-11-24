@@ -5,7 +5,6 @@ using FFTW
 using LinearAlgebra
 using ProgressMeter: Progress, next!
 using Random
-using MKLSparse
 using SparseArrays
 using StatsBase: sample
 
@@ -18,6 +17,19 @@ include("sketchy.jl")
 include("increment.jl")
 include("finalize.jl")
 include("rsvd.jl")
+
+# Conditionally load MKLSparse on non-macOS systems
+if !Sys.isapple()
+    try
+        using MKLSparse
+        const HAS_MKL = true
+    catch
+        const HAS_MKL = false
+        @warn "MKLSparse not available, using standard sparse operations"
+    end
+else
+    const HAS_MKL = false
+end
 
 export Sketchy 
 export init_sketchy, increment!, dump!, finalize!, full_increment!
