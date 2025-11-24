@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Getting Started · SketchySVD</title><meta name="title" content="Getting Started · SketchySVD"/><meta property="og:title" content="Getting Started · SketchySVD"/><meta property="twitter:title" content="Getting Started · SketchySVD"/><meta name="description" content="Documentation for SketchySVD."/><meta property="og:description" content="Documentation for SketchySVD."/><meta property="twitter:description" content="Documentation for SketchySVD."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script><link href="../assets/citations.css" rel="stylesheet" type="text/css"/></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">SketchySVD</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><span class="tocitem">Mathematical Background</span><ul><li><a class="tocitem" href="../theory/">Theory</a></li><li><a class="tocitem" href="../sketching/">Sketching Algorithms</a></li><li><a class="tocitem" href="../rsvd/">Randomized SVD</a></li></ul></li><li><span class="tocitem">User Guide</span><ul><li class="is-active"><a class="tocitem" href>Getting Started</a><ul class="internal"><li><a class="tocitem" href="#Installation"><span>Installation</span></a></li><li><a class="tocitem" href="#Quick-Example"><span>Quick Example</span></a></li><li><a class="tocitem" href="#Basic-Workflows"><span>Basic Workflows</span></a></li><li><a class="tocitem" href="#Choosing-Parameters"><span>Choosing Parameters</span></a></li><li><a class="tocitem" href="#Common-Use-Cases"><span>Common Use Cases</span></a></li><li><a class="tocitem" href="#Error-Estimation"><span>Error Estimation</span></a></li><li><a class="tocitem" href="#Performance-Tips"><span>Performance Tips</span></a></li><li><a class="tocitem" href="#Troubleshooting"><span>Troubleshooting</span></a></li><li><a class="tocitem" href="#Need-Help?"><span>Need Help?</span></a></li></ul></li><li><a class="tocitem" href="../redux_maps/">Dimension Reduction Maps</a></li><li><a class="tocitem" href="../examples/">Examples</a></li></ul></li><li><a class="tocitem" href="../api/">API Reference</a></li><li><a class="tocitem" href="../paper/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">User Guide</a></li><li class="is-active"><a href>Getting Started</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Getting Started</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/smallpondtom/SketchySVD.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/smallpondtom/SketchySVD.jl/blob/https://github.com/smallpondtom/SketchySVD.jl/docs/src/quickstart.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Getting-Started"><a class="docs-heading-anchor" href="#Getting-Started">Getting Started</a><a id="Getting-Started-1"></a><a class="docs-heading-anchor-permalink" href="#Getting-Started" title="Permalink"></a></h1><p>This guide will help you get up and running with SketchySVD.jl quickly.</p><h2 id="Installation"><a class="docs-heading-anchor" href="#Installation">Installation</a><a id="Installation-1"></a><a class="docs-heading-anchor-permalink" href="#Installation" title="Permalink"></a></h2><p>Install SketchySVD from the Julia REPL:</p><pre><code class="language-julia hljs">using Pkg
+Pkg.add(&quot;SketchySVD&quot;)</code></pre><p>Or in package mode (press <code>]</code>):</p><pre><code class="language-julia-repl hljs">pkg&gt; add SketchySVD</code></pre><h3 id="Development-Version"><a class="docs-heading-anchor" href="#Development-Version">Development Version</a><a id="Development-Version-1"></a><a class="docs-heading-anchor-permalink" href="#Development-Version" title="Permalink"></a></h3><p>For the latest features:</p><pre><code class="language-julia hljs">using Pkg
+Pkg.add(url=&quot;https://github.com/smallpondtom/SketchySVD.jl&quot;)</code></pre><h2 id="Quick-Example"><a class="docs-heading-anchor" href="#Quick-Example">Quick Example</a><a id="Quick-Example-1"></a><a class="docs-heading-anchor-permalink" href="#Quick-Example" title="Permalink"></a></h2><p>Here&#39;s a minimal example to compute a low-rank approximation:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+
+# Generate random matrix
+m, n = 1000, 500
+A = randn(m, n)
+
+# Compute rank-20 approximation
+r = 20
+U, S, V = rsvd(A, r)
+
+# Check approximation quality
+A_approx = U * Diagonal(S) * V&#39;
+relative_error = norm(A - A_approx) / norm(A)
+println(&quot;Relative error: &quot;, relative_error)  # Should be ~0.5-0.8 for random matrix</code></pre><h2 id="Basic-Workflows"><a class="docs-heading-anchor" href="#Basic-Workflows">Basic Workflows</a><a id="Basic-Workflows-1"></a><a class="docs-heading-anchor-permalink" href="#Basic-Workflows" title="Permalink"></a></h2><h3 id="1.-Randomized-SVD-(Batch-Processing)"><a class="docs-heading-anchor" href="#1.-Randomized-SVD-(Batch-Processing)">1. Randomized SVD (Batch Processing)</a><a id="1.-Randomized-SVD-(Batch-Processing)-1"></a><a class="docs-heading-anchor-permalink" href="#1.-Randomized-SVD-(Batch-Processing)" title="Permalink"></a></h3><p>Use <code>rsvd()</code> when you have the entire matrix at once:</p><pre><code class="language-julia hljs">using SketchySVD
+
+# Your matrix
+A = randn(5000, 2000)
+
+# Compute top 50 singular triplets
+U, S, V = rsvd(A, 50)
+
+# Optional: use oversampling for better accuracy
+U, S, V = rsvd(A, 50; p=10)  # p=10 extra dimensions
+
+# Optional: use power iterations for better accuracy
+U, S, V = rsvd(A, 50; q=2)   # q=2 power iterations</code></pre><p><strong>When to use</strong>: Static matrices, batch data, when full matrix fits in memory.</p><h3 id="2.-Sketchy-SVD-(Streaming-Processing)"><a class="docs-heading-anchor" href="#2.-Sketchy-SVD-(Streaming-Processing)">2. Sketchy SVD (Streaming Processing)</a><a id="2.-Sketchy-SVD-(Streaming-Processing)-1"></a><a class="docs-heading-anchor-permalink" href="#2.-Sketchy-SVD-(Streaming-Processing)" title="Permalink"></a></h3><p>Use Sketchy when data arrives incrementally:</p><pre><code class="language-julia hljs">using SketchySVD
+
+# Initialize sketchy structure
+m, n = 5000, 2000
+r = 50  # Target rank
+sketchy = init_sketchy(m=m, n=n, r=r)
+
+# Process data column by column
+for j in 1:n
+    x = get_data_column(j)  # Your data source
+    increment!(sketchy, x)
+end
+
+# Finalize to get SVD
+finalize!(sketchy)</code></pre><p><strong>When to use</strong>: Streaming data, online learning, memory constraints, temporal data.</p><h2 id="Choosing-Parameters"><a class="docs-heading-anchor" href="#Choosing-Parameters">Choosing Parameters</a><a id="Choosing-Parameters-1"></a><a class="docs-heading-anchor-permalink" href="#Choosing-Parameters" title="Permalink"></a></h2><h3 id="Target-Rank-r"><a class="docs-heading-anchor" href="#Target-Rank-r">Target Rank <span>$r$</span></a><a id="Target-Rank-r-1"></a><a class="docs-heading-anchor-permalink" href="#Target-Rank-r" title="Permalink"></a></h3><p>The most important parameter is the target rank:</p><pre><code class="language-julia hljs"># Low-rank (fast, less accurate)
+sketchy = init_sketchy(m=m, n=n, r=10)
+
+# Medium-rank (balanced)
+sketchy = init_sketchy(m=m, n=n, r=50)
+
+# High-rank (slower, more accurate)
+sketchy = init_sketchy(m=m, n=n, r=200)</code></pre><p><strong>Guidelines</strong>:</p><ul><li>Start with <span>$r = 50$</span> for most applications</li><li>Use <span>$r \geq 2 \times$</span> true rank for good accuracy</li><li>Increase <span>$r$</span> if approximation error is too high</li></ul><h3 id="Sketch-Dimension-k"><a class="docs-heading-anchor" href="#Sketch-Dimension-k">Sketch Dimension <span>$k$</span></a><a id="Sketch-Dimension-k-1"></a><a class="docs-heading-anchor-permalink" href="#Sketch-Dimension-k" title="Permalink"></a></h3><p>The sketch dimension controls accuracy vs speed trade-off:</p><pre><code class="language-julia hljs"># Default: k = 2r + 1
+sketchy = init_sketchy(m=m, n=n, r=r)
+
+# Higher accuracy: k = 3r
+sketchy = init_sketchy(m=m, n=n, r=r, T=3*r)
+
+# Lower memory: k = r + 10
+sketchy = init_sketchy(m=m, n=n, r=r, T=r+10)</code></pre><p><strong>Guidelines</strong>:</p><ul><li>Default <span>$k = 2r+1$</span> works well for most cases</li><li>Use larger <span>$k$</span> for noisy data</li><li>Minimum: <span>$k \geq r$</span></li></ul><h3 id="Reduction-Map-Type"><a class="docs-heading-anchor" href="#Reduction-Map-Type">Reduction Map Type</a><a id="Reduction-Map-Type-1"></a><a class="docs-heading-anchor-permalink" href="#Reduction-Map-Type" title="Permalink"></a></h3><p>Choose based on matrix size and structure:</p><pre><code class="language-julia hljs"># Gaussian (default): best accuracy
+sketchy = init_sketchy(m=m, n=n, r=r, ReduxMap=:gauss)
+
+# Sparse: large matrices (n &gt; 50,000)
+sketchy = init_sketchy(m=m, n=n, r=r, ReduxMap=:sparse)
+
+# SSRFT: structured/periodic data
+sketchy = init_sketchy(m=m, n=n, r=r, ReduxMap=:ssrft)</code></pre><p>See <a href="../redux_maps/#Dimension-Reduction-Maps">Dimension Reduction Maps</a> for detailed comparison.</p><h2 id="Common-Use-Cases"><a class="docs-heading-anchor" href="#Common-Use-Cases">Common Use Cases</a><a id="Common-Use-Cases-1"></a><a class="docs-heading-anchor-permalink" href="#Common-Use-Cases" title="Permalink"></a></h2><h3 id="Case-1:-Large-Dense-Matrix"><a class="docs-heading-anchor" href="#Case-1:-Large-Dense-Matrix">Case 1: Large Dense Matrix</a><a id="Case-1:-Large-Dense-Matrix-1"></a><a class="docs-heading-anchor-permalink" href="#Case-1:-Large-Dense-Matrix" title="Permalink"></a></h3><pre><code class="language-julia hljs"># Matrix too large for standard SVD
+m, n = 100_000, 50_000
+A = randn(m, n)  # 37 GB of memory!
+
+# Use randomized SVD with sparse map
+U, S, V = rsvd(A, 100; redux=:sparse)
+
+# Or streaming if matrix doesn&#39;t fit in memory
+sketchy = init_sketchy(m=m, n=n, r=100, ReduxMap=:sparse)
+for j in 1:n
+    # Load column from disk/network
+    x = load_column(j)
+    increment!(sketchy, x)
+end
+finalize!(sketchy)</code></pre><h3 id="Case-2:-Time-Series-Data"><a class="docs-heading-anchor" href="#Case-2:-Time-Series-Data">Case 2: Time Series Data</a><a id="Case-2:-Time-Series-Data-1"></a><a class="docs-heading-anchor-permalink" href="#Case-2:-Time-Series-Data" title="Permalink"></a></h3><pre><code class="language-julia hljs"># Process temporal data with forgetting factor
+m, n = 1000, 5000
+r = 30
+λ = 0.99  # Forget old data slowly
+
+sketchy = init_sketchy(m=m, n=n, r=r)
+
+for t in 1:n
+    x = get_sensor_data(t)
+    increment!(sketchy, x, 1.0, λ)
+    
+    # Optional: get current approximation
+    if t % 100 == 0
+        finalize!(sketchy)
+        U = sketchy.V 
+        S = sketchy.Σ
+        V = sketchy.W
+        analyze_current_state(U, S, V)
+    end
+end</code></pre><h3 id="Case-3:-Image/Video-Processing"><a class="docs-heading-anchor" href="#Case-3:-Image/Video-Processing">Case 3: Image/Video Processing</a><a id="Case-3:-Image/Video-Processing-1"></a><a class="docs-heading-anchor-permalink" href="#Case-3:-Image/Video-Processing" title="Permalink"></a></h3><pre><code class="language-julia hljs"># Process video frames
+n_frames = 1000
+height, width = 480, 640
+m = height * width  # Vectorized frames
+
+sketchy = init_sketchy(m=m, n=n_frames, r=50, ReduxMap=:ssrft)
+
+for t in 1:n_frames
+    frame = read_video_frame(t)
+    x = vec(frame)  # Flatten to vector
+    increment!(sketchy, x)
+end
+
+finalize!(sketchy)
+
+# U contains spatial patterns
+# V contains temporal patterns</code></pre><h3 id="Case-4:-Sparse-Data"><a class="docs-heading-anchor" href="#Case-4:-Sparse-Data">Case 4: Sparse Data</a><a id="Case-4:-Sparse-Data-1"></a><a class="docs-heading-anchor-permalink" href="#Case-4:-Sparse-Data" title="Permalink"></a></h3><pre><code class="language-julia hljs">using SparseArrays
+
+# Sparse matrix (e.g., from sparse sensor data)
+m, n = 10_000, 5_000
+A = sprand(m, n, 0.01)  # 1% density
+
+# Convert to dense for processing (sketches are dense)
+r = 50
+sketchy = init_sketchy(m=m, n=n, r=r)
+
+for j in 1:n
+    x = Vector(A[:, j])  # Convert sparse column to dense
+    increment!(sketchy, x)
+end
+
+finalize!(sketchy)</code></pre><h2 id="Error-Estimation"><a class="docs-heading-anchor" href="#Error-Estimation">Error Estimation</a><a id="Error-Estimation-1"></a><a class="docs-heading-anchor-permalink" href="#Error-Estimation" title="Permalink"></a></h2><p>Enable error estimation to monitor approximation quality:</p><pre><code class="language-julia hljs"># Initialize with error tracking
+sketchy = init_sketchy(m=m, n=n, r=r, ErrorEstimate=true)
+
+# Process data
+for j in 1:n
+    result = increment!(sketchy, x)
+    
+    # Check estimated error (optional)
+    if !isnothing(result.est_err)
+        println(&quot;Estimated error at column $j: &quot;, result.est_err)
+    end
+end
+
+# Final error estimate
+est_err, _ = finalize(sketchy)
+println(&quot;Final estimated relative error: &quot;, est_err)</code></pre><h2 id="Performance-Tips"><a class="docs-heading-anchor" href="#Performance-Tips">Performance Tips</a><a id="Performance-Tips-1"></a><a class="docs-heading-anchor-permalink" href="#Performance-Tips" title="Permalink"></a></h2><h3 id="1.-Use-BLAS-Threads"><a class="docs-heading-anchor" href="#1.-Use-BLAS-Threads">1. Use BLAS Threads</a><a id="1.-Use-BLAS-Threads-1"></a><a class="docs-heading-anchor-permalink" href="#1.-Use-BLAS-Threads" title="Permalink"></a></h3><p>Julia automatically uses multi-threaded BLAS:</p><pre><code class="language-julia hljs">using LinearAlgebra
+BLAS.set_num_threads(4)  # Use 4 threads
+
+# Now sketching will use parallel BLAS operations
+sketchy = init_sketchy(m=m, n=n, r=r)</code></pre><h3 id="2.-Batch-Processing"><a class="docs-heading-anchor" href="#2.-Batch-Processing">2. Batch Processing</a><a id="2.-Batch-Processing-1"></a><a class="docs-heading-anchor-permalink" href="#2.-Batch-Processing" title="Permalink"></a></h3><p>Process multiple columns at once when possible:</p><pre><code class="language-julia hljs">sketchy = init_sketchy(m=m, n=n, r=r)
+
+# Instead of column-by-column
+batch_size = 50
+for start in 1:batch_size:n
+    stop = min(start + batch_size - 1, n)
+    B = A[:, start:stop]
+    
+    for j in start:stop
+        increment!(sketchy, B[:, j-start+1])
+    end
+end</code></pre><h3 id="3.-Choose-Right-Map"><a class="docs-heading-anchor" href="#3.-Choose-Right-Map">3. Choose Right Map</a><a id="3.-Choose-Right-Map-1"></a><a class="docs-heading-anchor-permalink" href="#3.-Choose-Right-Map" title="Permalink"></a></h3><p>For large <span>$n$</span>, sparse maps are much faster:</p><pre><code class="language-julia hljs"># For n &gt; 50,000
+sketchy = init_sketchy(m=m, n=n, r=r, ReduxMap=:sparse)</code></pre><h3 id="4.-Preallocate-Buffers"><a class="docs-heading-anchor" href="#4.-Preallocate-Buffers">4. Preallocate Buffers</a><a id="4.-Preallocate-Buffers-1"></a><a class="docs-heading-anchor-permalink" href="#4.-Preallocate-Buffers" title="Permalink"></a></h3><p>Avoid repeated allocations:</p><pre><code class="language-julia hljs">sketchy = init_sketchy(m=m, n=n, r=r
+x_buffer = zeros(m)
+
+for j in 1:n
+    # Reuse buffer instead of allocating
+    load_column!(x_buffer, j)
+    increment!(sketchy, x_buffer)
+end</code></pre><h2 id="Troubleshooting"><a class="docs-heading-anchor" href="#Troubleshooting">Troubleshooting</a><a id="Troubleshooting-1"></a><a class="docs-heading-anchor-permalink" href="#Troubleshooting" title="Permalink"></a></h2><h3 id="Error:-Dimension-Mismatch"><a class="docs-heading-anchor" href="#Error:-Dimension-Mismatch">Error: Dimension Mismatch</a><a id="Error:-Dimension-Mismatch-1"></a><a class="docs-heading-anchor-permalink" href="#Error:-Dimension-Mismatch" title="Permalink"></a></h3><pre><code class="language-julia hljs"># ERROR: DimensionMismatch
+sketchy = init_sketchy(m=1000, n=500, r=50)
+x = randn(999)  # Wrong size!
+increment!(sketchy, x)</code></pre><p><strong>Solution</strong>: Ensure <code>length(x) == m</code> where <code>m</code> is the row dimension.</p><h3 id="Poor-Approximation-Quality"><a class="docs-heading-anchor" href="#Poor-Approximation-Quality">Poor Approximation Quality</a><a id="Poor-Approximation-Quality-1"></a><a class="docs-heading-anchor-permalink" href="#Poor-Approximation-Quality" title="Permalink"></a></h3><pre><code class="language-julia hljs"># Relative error too high
+U, S, V = rsvd(A, 20)
+error = norm(A - U*Diagonal(S)*V&#39;) / norm(A)
+println(error)  # Too large!</code></pre><p><strong>Solutions</strong>:</p><ol><li>Increase rank <code>r</code></li><li>Use oversampling: <code>rsvd(A, r; p=20)</code></li><li>Use power iterations: <code>rsvd(A, r; q=2)</code></li><li>Increase sketch dimension <code>T</code></li></ol><h3 id="Memory-Issues"><a class="docs-heading-anchor" href="#Memory-Issues">Memory Issues</a><a id="Memory-Issues-1"></a><a class="docs-heading-anchor-permalink" href="#Memory-Issues" title="Permalink"></a></h3><pre><code class="language-julia hljs"># OutOfMemoryError with Gaussian map
+sketchy = init_sketchy(m=100_000, n=500_000, r=100)  # Too large!</code></pre><p><strong>Solutions</strong>:</p><ol><li>Use sparse map: <code>ReduxMap=:sparse</code></li><li>Use SSRFT: <code>ReduxMap=:ssrft</code></li><li>Reduce rank <code>r</code></li><li>Process in chunks</li></ol><h3 id="Slow-Performance"><a class="docs-heading-anchor" href="#Slow-Performance">Slow Performance</a><a id="Slow-Performance-1"></a><a class="docs-heading-anchor-permalink" href="#Slow-Performance" title="Permalink"></a></h3><pre><code class="language-julia hljs"># Processing is too slow
+@time for j in 1:n
+    increment!(sketchy, x, j)
+end</code></pre><p><strong>Solutions</strong>:</p><ol><li>Use sparse map for large <code>n</code></li><li>Enable BLAS threading</li><li>Reduce sketch dimension <code>T</code></li><li>Use batch processing</li></ol><h2 id="Need-Help?"><a class="docs-heading-anchor" href="#Need-Help?">Need Help?</a><a id="Need-Help?-1"></a><a class="docs-heading-anchor-permalink" href="#Need-Help?" title="Permalink"></a></h2><ul><li><strong>Issues</strong>: Report bugs on <a href="https://github.com/username/SketchySVD.jl/issues">GitHub Issues</a></li><li><strong>Discussions</strong>: Ask questions on <a href="https://github.com/username/SketchySVD.jl/discussions">GitHub Discussions</a></li><li><strong>Documentation</strong>: Read the full <a href="https://username.github.io/SketchySVD.jl/">documentation</a></li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../rsvd/">« Randomized SVD</a><a class="docs-footer-nextpage" href="../redux_maps/">Dimension Reduction Maps »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.16.1 on <span class="colophon-date" title="Monday 24 November 2025 17:26">Monday 24 November 2025</span>. Using Julia version 1.12.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
