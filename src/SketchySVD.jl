@@ -3,9 +3,9 @@ module SketchySVD
 # Packages
 using FFTW
 using LinearAlgebra
-using MKLSparse
 using ProgressMeter: Progress, next!
 using Random
+using MKLSparse
 using SparseArrays
 using StatsBase: sample
 
