@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Examples · SketchySVD</title><meta name="title" content="Examples · SketchySVD"/><meta property="og:title" content="Examples · SketchySVD"/><meta property="twitter:title" content="Examples · SketchySVD"/><meta name="description" content="Documentation for SketchySVD."/><meta property="og:description" content="Documentation for SketchySVD."/><meta property="twitter:description" content="Documentation for SketchySVD."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script><link href="../assets/citations.css" rel="stylesheet" type="text/css"/></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">SketchySVD</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><span class="tocitem">Mathematical Background</span><ul><li><a class="tocitem" href="../theory/">Theory</a></li><li><a class="tocitem" href="../sketching/">Sketching Algorithms</a></li><li><a class="tocitem" href="../rsvd/">Randomized SVD</a></li></ul></li><li><span class="tocitem">User Guide</span><ul><li><a class="tocitem" href="../quickstart/">Getting Started</a></li><li><a class="tocitem" href="../redux_maps/">Dimension Reduction Maps</a></li><li class="is-active"><a class="tocitem" href>Examples</a><ul class="internal"><li><a class="tocitem" href="#Example-1:-Basic-Low-Rank-Approximation"><span>Example 1: Basic Low-Rank Approximation</span></a></li><li><a class="tocitem" href="#Example-2:-Image-Compression"><span>Example 2: Image Compression</span></a></li><li><a class="tocitem" href="#Example-3:-Streaming-PCA"><span>Example 3: Streaming PCA</span></a></li><li><a class="tocitem" href="#Example-4:-Video-Background-Subtraction"><span>Example 4: Video Background Subtraction</span></a></li><li><a class="tocitem" href="#Example-5:-Temporal-Data-with-Forgetting"><span>Example 5: Temporal Data with Forgetting</span></a></li><li><a class="tocitem" href="#Example-6:-Large-Scale-Matrix-with-Sparse-Map"><span>Example 6: Large-Scale Matrix with Sparse Map</span></a></li><li><a class="tocitem" href="#Example-7:-Comparison-with-Standard-SVD"><span>Example 7: Comparison with Standard SVD</span></a></li><li><a class="tocitem" href="#Example-8:-Adaptive-Rank-Selection"><span>Example 8: Adaptive Rank Selection</span></a></li><li><a class="tocitem" href="#Example-9:-Burgers&#39;-Equation-(PDE-Solution)"><span>Example 9: Burgers&#39; Equation (PDE Solution)</span></a></li><li><a class="tocitem" href="#Example-10:-Real-Time-Anomaly-Detection"><span>Example 10: Real-Time Anomaly Detection</span></a></li><li><a class="tocitem" href="#More-Examples"><span>More Examples</span></a></li><li><a class="tocitem" href="#Tips-for-Your-Application"><span>Tips for Your Application</span></a></li><li><a class="tocitem" href="#Questions?"><span>Questions?</span></a></li></ul></li></ul></li><li><a class="tocitem" href="../api/">API Reference</a></li><li><a class="tocitem" href="../paper/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">User Guide</a></li><li class="is-active"><a href>Examples</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Examples</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/smallpondtom/SketchySVD.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/smallpondtom/SketchySVD.jl/blob/https://github.com/smallpondtom/SketchySVD.jl/docs/src/examples.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Examples"><a class="docs-heading-anchor" href="#Examples">Examples</a><a id="Examples-1"></a><a class="docs-heading-anchor-permalink" href="#Examples" title="Permalink"></a></h1><p>This page provides comprehensive examples demonstrating various use cases of SketchySVD.jl.</p><h2 id="Example-1:-Basic-Low-Rank-Approximation"><a class="docs-heading-anchor" href="#Example-1:-Basic-Low-Rank-Approximation">Example 1: Basic Low-Rank Approximation</a><a id="Example-1:-Basic-Low-Rank-Approximation-1"></a><a class="docs-heading-anchor-permalink" href="#Example-1:-Basic-Low-Rank-Approximation" title="Permalink"></a></h2><p>Compute a low-rank approximation of a random matrix:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+using Random
+
+Random.seed!(42)
+
+# Create a low-rank matrix with noise
+m, n, true_rank = 1000, 500, 20
+U_true = randn(m, true_rank)
+U_true = qr(U_true).Q  # Orthonormalize
+V_true = randn(n, true_rank)
+V_true = qr(V_true).Q  # Orthonormalize
+S_true = sort(rand(true_rank), rev=true) .* 100
+A = U_true * Diagonal(S_true) * V_true&#39; + 0.1 * randn(m, n)
+
+# Compute approximation
+r = 30  # Oversample beyond true rank
+U, S, V = rsvd(A, r)
+
+# Evaluate quality
+A_approx = U * Diagonal(S) * V&#39;
+relative_error = norm(A - A_approx) / norm(A)
+println(&quot;Relative approximation error: $relative_error&quot;)
+
+# Compare singular values
+using Plots
+plot(S_true, label=&quot;True&quot;, marker=:circle, ylabel=&quot;Singular Value&quot;, xlabel=&quot;Index&quot;)
+plot!(S[1:true_rank], label=&quot;Estimated&quot;, marker=:square, legend=:topright)</code></pre><p><strong>Expected output</strong>: Relative error &lt; 1%, singular values closely match.</p><h2 id="Example-2:-Image-Compression"><a class="docs-heading-anchor" href="#Example-2:-Image-Compression">Example 2: Image Compression</a><a id="Example-2:-Image-Compression-1"></a><a class="docs-heading-anchor-permalink" href="#Example-2:-Image-Compression" title="Permalink"></a></h2><p>Compress an image using low-rank approximation:</p><pre><code class="language-julia hljs">using SketchySVD
+using TestImages, ImageIO
+using LinearAlgebra
+
+# Load image (or create synthetic)
+img = Float64.(Gray.(testimage(&quot;cameraman&quot;)))
+m, n = size(img)
+
+# Compress with different ranks
+ranks = [5, 10, 20, 50, 100]
+compressed_images = []
+
+for r in ranks
+    U, S, V = rsvd(img, r)
+    img_approx = U * Diagonal(S) * V&#39;
+    
+    error = norm(img - img_approx) / norm(img)
+    compression_ratio = (m * n) / (r * (m + n + 1))
+    
+    println(&quot;Rank $r: Error = $(round(error, digits=4)), Compression = $(round(compression_ratio, digits=2))x&quot;)
+    push!(compressed_images, img_approx)
+end
+
+# Visualize results
+using Plots
+plot(
+    plot(Gray.(img), title=&quot;Original&quot;),
+    plot(Gray.(compressed_images[1]), title=&quot;Rank 5&quot;),
+    plot(Gray.(compressed_images[3]), title=&quot;Rank 20&quot;),
+    plot(Gray.(compressed_images[5]), title=&quot;Rank 100&quot;),
+    layout=(2,2)
+)</code></pre><p><strong>Key insight</strong>: Rank 50-100 often gives good visual quality with 10-20x compression.</p><h2 id="Example-3:-Streaming-PCA"><a class="docs-heading-anchor" href="#Example-3:-Streaming-PCA">Example 3: Streaming PCA</a><a id="Example-3:-Streaming-PCA-1"></a><a class="docs-heading-anchor-permalink" href="#Example-3:-Streaming-PCA" title="Permalink"></a></h2><p>Perform PCA on streaming data:</p><pre><code class="language-julia hljs">using SketchySVD
+using Statistics
+using LinearAlgebra
+
+# Simulate streaming sensor data
+n_sensors = 100
+n_timesteps = 5000
+true_components = 5
+
+# Generate synthetic data with 5 principal components
+W = randn(n_sensors, true_components)
+H = randn(true_components, n_timesteps)
+data = W * H + 0.5 * randn(n_sensors, n_timesteps)
+
+# Normalize (center and scale)
+data_mean = mean(data, dims=2)
+data_centered = data .- data_mean
+
+# Streaming PCA with Sketchy
+sketchy = init_sketchy(m=n_sensors, n=n_timesteps, r=20, ReduxMap=:sparse)
+
+for t in 1:n_timesteps
+    x = data_centered[:, t]
+    increment!(sketchy, x)
+    
+    # Optional: periodic updates
+    if t % 1000 == 0
+        _, _ = finalize!(sketchy)
+        println(&quot;At t=$t: Top 5 singular values: $(sketchy.Σ[1:5])&quot;)
+    end
+end
+
+# Final PCA
+finalize!(sketchy)
+
+# Principal components are columns of U
+# Projections onto components are rows of Diagonal(S) * V&#39;
+
+# Analyze variance explained
+S = sketchy.Σ
+total_variance = sum(S.^2)
+variance_explained = cumsum(S.^2) ./ total_variance
+
+using Plots
+plot(variance_explained[1:20], 
+     label=&quot;Cumulative Variance Explained&quot;,
+     marker=:circle,
+     xlabel=&quot;Number of Components&quot;,
+     ylabel=&quot;Fraction of Variance&quot;)
+hline!([0.9, 0.95, 0.99], label=[&quot;90%&quot; &quot;95%&quot; &quot;99%&quot;], linestyle=:dash)</code></pre><p><strong>Key insight</strong>: Usually 5-10 components explain &gt; 90% of variance in real data.</p><h2 id="Example-4:-Video-Background-Subtraction"><a class="docs-heading-anchor" href="#Example-4:-Video-Background-Subtraction">Example 4: Video Background Subtraction</a><a id="Example-4:-Video-Background-Subtraction-1"></a><a class="docs-heading-anchor-permalink" href="#Example-4:-Video-Background-Subtraction" title="Permalink"></a></h2><p>Separate foreground objects from video background:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+
+# Simulate video: static background + moving foreground
+n_frames = 200
+height, width = 64, 64
+m = height * width
+
+# Background: low-rank
+background = randn(height, width, 3)
+background_flat = zeros(m, n_frames)
+for t in 1:n_frames
+    background_flat[:, t] = vec(background[:,:,1])  # Static
+end
+
+# Foreground: sparse
+foreground = zeros(m, n_frames)
+for t in 1:n_frames
+    # Moving object
+    obj_size = 10
+    x_pos = 20 + div(t * width, n_frames)
+    y_pos = 30
+    indices = (y_pos:y_pos+obj_size-1, x_pos:min(x_pos+obj_size-1, width))
+    
+    for i in indices[1], j in indices[2]
+        idx = (j-1) * height + i
+        if idx &lt;= m
+            foreground[idx, t] = 100  # Bright object
+        end
+    end
+end
+
+# Composite video
+video = background_flat + foreground
+
+# Robust PCA via sketching
+r_background = 5  # Background is low-rank
+sketchy = init_sketchy(m=m, n=n_frames, r=r_background, ReduxMap=:sparse)
+
+for t in 1:n_frames
+    increment!(sketchy, video[:, t])
+end
+
+finalize!(sketchy)
+U = sketchy.V
+S = sketchy.Σ
+V = sketchy.W
+background_recovered = U * Diagonal(S) * V&#39;
+foreground_recovered = video - background_recovered
+
+# Visualize results
+using Plots
+t_show = 100
+plot(
+    heatmap(reshape(video[:, t_show], height, width), title=&quot;Original Frame&quot;),
+    heatmap(reshape(background_recovered[:, t_show], height, width), title=&quot;Background&quot;),
+    heatmap(reshape(foreground_recovered[:, t_show], height, width), title=&quot;Foreground&quot;),
+    layout=(1,3), colorbar=false
+)</code></pre><p><strong>Key insight</strong>: Low-rank approximation captures static/slow-varying background, residual is foreground.</p><h2 id="Example-5:-Temporal-Data-with-Forgetting"><a class="docs-heading-anchor" href="#Example-5:-Temporal-Data-with-Forgetting">Example 5: Temporal Data with Forgetting</a><a id="Example-5:-Temporal-Data-with-Forgetting-1"></a><a class="docs-heading-anchor-permalink" href="#Example-5:-Temporal-Data-with-Forgetting" title="Permalink"></a></h2><p>Track evolving patterns in non-stationary time series:</p><pre><code class="language-julia hljs">using SketchySVD
+using Plots
+
+# Simulate evolving system: frequencies change over time
+n_sensors = 50
+n_timesteps = 2000
+m = n_sensors
+
+function generate_evolving_data(t, n_sensors)
+    # Frequency drifts over time
+    freq1 = 0.1 + 0.05 * sin(2π * t / 500)
+    freq2 = 0.2 + 0.03 * cos(2π * t / 700)
+    
+    x = zeros(n_sensors)
+    for i in 1:n_sensors
+        phase = 2π * i / n_sensors
+        x[i] = sin(2π * freq1 * t + phase) + 0.5 * sin(2π * freq2 * t)
+    end
+    
+    return x + 0.1 * randn(n_sensors)
+end
+
+# Track with exponential forgetting
+η = 0.99  # Forget slowly
+sketchy = init_sketchy(m=m, n=n_timesteps, r=10, ErrorEstimate=true)
+
+errors = Float64[]
+top_sv = Float64[]
+
+for t in 1:n_timesteps
+    x = generate_evolving_data(t, n_sensors)
+    result = increment!(sketchy, x, 1.0, η)
+    
+    # Track every 50 steps
+    if t % 50 == 0
+        est_err, _ = finalize!(sketchy)
+        S = sketchy.Σ
+        push!(errors, isnothing(est_err) ? NaN : est_err)
+        push!(top_sv, S[1])
+        
+        println(&quot;t=$t: Top SV = $(round(S[1], digits=2)), Error = $(isnothing(est_err) ? &quot;N/A&quot; : round(est_err, digits=4))&quot;)
+    end
+end
+
+# Plot evolution
+plot(
+    plot(50:50:n_timesteps, top_sv, label=&quot;Top Singular Value&quot;, ylabel=&quot;Value&quot;),
+    plot(50:50:n_timesteps, errors, label=&quot;Estimated Error&quot;, ylabel=&quot;Error&quot;),
+    layout=(2,1), xlabel=&quot;Time&quot;, legend=:topright
+)</code></pre><p><strong>Key insight</strong>: Forgetting factor allows tracking of non-stationary dynamics.</p><h2 id="Example-6:-Large-Scale-Matrix-with-Sparse-Map"><a class="docs-heading-anchor" href="#Example-6:-Large-Scale-Matrix-with-Sparse-Map">Example 6: Large-Scale Matrix with Sparse Map</a><a id="Example-6:-Large-Scale-Matrix-with-Sparse-Map-1"></a><a class="docs-heading-anchor-permalink" href="#Example-6:-Large-Scale-Matrix-with-Sparse-Map" title="Permalink"></a></h2><p>Efficiently handle very large matrices:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+using Printf
+
+# Very large matrix (simulated - not created in memory)
+m, n = 100_000, 50_000
+r = 100
+
+println(&quot;Matrix size: $m × $n ($(m*n/1e9) billion elements)&quot;)
+println(&quot;Would require $(8*m*n/1e9) GB if stored as Float64&quot;)
+
+# Function to generate columns on-the-fly
+function generate_column(j, m, true_rank=50)
+    # Simulate low-rank structure
+    U_col = randn(m) * sin(2π * j / n)  # Smooth variation
+    return U_col + 0.01 * randn(m)
+end
+
+# Use sparse reduction map for efficiency
+sketchy = init_sketchy(m=m, n=n, r=r, ReduxMap=:sparse)
+
+# Process in streaming fashion
+println(&quot;\nProcessing columns...&quot;)
+@time begin
+    for j in 1:n
+        x = generate_column(j, m)
+        increment!(sketchy, x)
+        
+        if j % 10_000 == 0
+            @printf(&quot;Progress: %d/%d (%.1f%%)\n&quot;, j, n, 100*j/n)
+        end
+    end
+end
+
+println(&quot;\nFinalizing...&quot;)
+@time _, _ = finalize!(sketchy)
+
+println(&quot;\nTop 10 singular values:&quot;)
+S = sketchy.Σ
+println(S[1:10])
+
+# Memory usage (approximate)
+sketchy_size = sizeof(sketchy.Y) + sizeof(sketchy.Z) + sizeof(sketchy.Ω)
+println(&quot;\nApproximate memory used: $(sketchy_size/1e9) GB&quot;)</code></pre><p><strong>Key insight</strong>: Sparse maps enable processing matrices thousands of times larger than available RAM.</p><h2 id="Example-7:-Comparison-with-Standard-SVD"><a class="docs-heading-anchor" href="#Example-7:-Comparison-with-Standard-SVD">Example 7: Comparison with Standard SVD</a><a id="Example-7:-Comparison-with-Standard-SVD-1"></a><a class="docs-heading-anchor-permalink" href="#Example-7:-Comparison-with-Standard-SVD" title="Permalink"></a></h2><p>Compare accuracy and speed of different methods:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+using BenchmarkTools
+using Printf
+
+# Create test matrix
+m, n = 2000, 1000
+true_rank = 50
+U_true = randn(m, true_rank)
+S_true = exp.(-0.1 * (1:true_rank))  # Exponential decay
+V_true = randn(n, true_rank)
+A = U_true * Diagonal(S_true) * V_true&#39; + 0.01 * randn(m, n)
+
+r = 60  # Target rank
+
+# Method 1: Standard SVD (expensive)
+println(&quot;Standard SVD:&quot;)
+@time U_full, S_full, V_full = svd(A)
+A_full = U_full[:, 1:r] * Diagonal(S_full[1:r]) * V_full[:, 1:r]&#39;
+err_full = norm(A - A_full) / norm(A)
+println(&quot;Error: $err_full&quot;)
+
+# Method 2: Randomized SVD
+println(&quot;\nRandomized SVD:&quot;)
+@time U_rsvd, S_rsvd, V_rsvd = rsvd(A, r)
+A_rsvd = U_rsvd * Diagonal(S_rsvd) * V_rsvd&#39;
+err_rsvd = norm(A - A_rsvd) / norm(A)
+println(&quot;Error: $err_rsvd&quot;)
+
+# Method 3: Randomized SVD with power iterations
+println(&quot;\nRandomized SVD (q=2):&quot;)
+@time U_rsvd2, S_rsvd2, V_rsvd2 = rsvd(A, r; q=2)
+A_rsvd2 = U_rsvd2 * Diagonal(S_rsvd2) * V_rsvd2&#39;
+err_rsvd2 = norm(A - A_rsvd2) / norm(A)
+println(&quot;Error: $err_rsvd2&quot;)
+
+# Method 4: Sketchy (streaming)
+println(&quot;\nSketchy SVD:&quot;)
+@time begin
+    sketchy = init_sketchy(m=m, n=n, r=r, ReduxMap=:sparse)
+    for j in 1:n
+        increment!(sketchy, A[:, j])
+    end
+    finalize!(sketchy)
+end
+U_sketchy = sketchy.V
+S_sketchy = sketchy.Σ
+V_sketchy = sketchy.W
+A_sketchy = U_sketchy * Diagonal(S_sketchy) * V_sketchy&#39;
+err_sketchy = norm(A - A_sketchy) / norm(A)
+println(&quot;Error: $err_sketchy&quot;)
+
+# Summary
+println(&quot;\n&quot; * &quot;=&quot;^50)
+println(&quot;Summary:&quot;)
+println(&quot;Method                    Error         Speedup&quot;)
+println(&quot;-&quot; * &quot;=&quot;^50)
+@printf(&quot;Standard SVD            %.2e       1.0x (baseline)\n&quot;, err_full)
+@printf(&quot;Randomized SVD          %.2e       ~10-50x\n&quot;, err_rsvd)
+@printf(&quot;Randomized SVD (q=2)    %.2e       ~5-25x\n&quot;, err_rsvd2)
+@printf(&quot;Sketchy SVD             %.2e       ~5-20x\n&quot;, err_sketchy)</code></pre><p><strong>Key insight</strong>: Randomized methods are 10-50x faster with minimal accuracy loss.</p><h2 id="Example-8:-Adaptive-Rank-Selection"><a class="docs-heading-anchor" href="#Example-8:-Adaptive-Rank-Selection">Example 8: Adaptive Rank Selection</a><a id="Example-8:-Adaptive-Rank-Selection-1"></a><a class="docs-heading-anchor-permalink" href="#Example-8:-Adaptive-Rank-Selection" title="Permalink"></a></h2><p>Automatically determine the appropriate rank:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+
+# Unknown true rank
+m, n = 1000, 800
+A = rand(m, n)
+
+# Start with high rank estimate
+r_max = 100
+U, S, V = rsvd(A, r_max)
+
+# Find rank where singular values drop
+threshold = 0.03 * S[1]  # 1% of largest singular value
+r_effective = findfirst(S .&lt; threshold)
+
+if isnothing(r_effective)
+    r_effective = r_max
+    println(&quot;Need rank &gt; $r_max&quot;)
+else
+    println(&quot;Effective rank: $r_effective&quot;)
+end
+
+# Truncate to effective rank
+U = U[:, 1:r_effective]
+S = S[1:r_effective]
+V = V[:, 1:r_effective]
+
+# Verify accuracy
+A_approx = U * Diagonal(S) * V&#39;
+println(&quot;Relative error with rank $r_effective: $(norm(A - A_approx) / norm(A))&quot;)
+
+# Plot singular value decay
+using Plots
+plot(S, yscale=:log10, label=&quot;Singular Values&quot;, 
+     marker=:circle, ylabel=&quot;Singular Value (log scale)&quot;, xlabel=&quot;Index&quot;)
+hline!([threshold], label=&quot;Threshold&quot;, linestyle=:dash)</code></pre><p><strong>Key insight</strong>: Adaptive rank selection balances accuracy and efficiency.</p><h2 id="Example-9:-Burgers&#39;-Equation-(PDE-Solution)"><a class="docs-heading-anchor" href="#Example-9:-Burgers&#39;-Equation-(PDE-Solution)">Example 9: Burgers&#39; Equation (PDE Solution)</a><a id="Example-9:-Burgers&#39;-Equation-(PDE-Solution)-1"></a><a class="docs-heading-anchor-permalink" href="#Example-9:-Burgers&#39;-Equation-(PDE-Solution)" title="Permalink"></a></h2><p>Analyze solutions of a 1D viscous Burgers&#39; equation:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+using Plots
+
+# Load or generate Burgers&#39; equation data
+# (see scripts/burgers.jl for data generation)
+
+# Assuming data is in scripts/data/
+using CSV, DataFrames
+data_path = &quot;scripts/data/viscous_burgers1d_states.csv&quot;
+
+if isfile(data_path)
+    df = CSV.read(data_path, DataFrame)
+    snapshots = Matrix(df)  # Each column is a spatial snapshot at one time
+    
+    m, n = size(snapshots)
+    println(&quot;Loaded $n snapshots of size $m&quot;)
+    
+    # Compute POD (Proper Orthogonal Decomposition) modes
+    r = 20
+    U, S, V = rsvd(snapshots, r)
+    
+    # U columns are POD modes (spatial patterns)
+    # V columns are temporal coefficients
+    
+    # Analyze modal energy
+    modal_energy = S.^2
+    total_energy = sum(modal_energy)
+    energy_fraction = cumsum(modal_energy) ./ total_energy
+    
+    println(&quot;\nModal energy distribution:&quot;)
+    for i in 1:min(10, r)
+        @printf(&quot;Mode %2d: %.2f%% (cumulative: %.2f%%)\n&quot;, 
+                i, 100*modal_energy[i]/total_energy, 100*energy_fraction[i])
+    end
+    
+    # Visualize modes
+    p1 = plot(U[:, 1:4], label=[&quot;Mode 1&quot; &quot;Mode 2&quot; &quot;Mode 3&quot; &quot;Mode 4&quot;],
+              xlabel=&quot;Spatial Position&quot;, ylabel=&quot;Amplitude&quot;, title=&quot;POD Modes&quot;)
+    
+    p2 = plot(energy_fraction[1:r], marker=:circle, 
+              xlabel=&quot;Mode Index&quot;, ylabel=&quot;Cumulative Energy Fraction&quot;,
+              title=&quot;Energy Spectrum&quot;, legend=false)
+    hline!([0.99], linestyle=:dash, color=:red)
+    
+    plot(p1, p2, layout=(2,1))
+else
+    println(&quot;Data file not found. Run scripts/burgers.jl first.&quot;)
+end</code></pre><p><strong>Key insight</strong>: PDE solutions often have low effective rank; 5-10 modes capture &gt; 99% energy.</p><h2 id="Example-10:-Real-Time-Anomaly-Detection"><a class="docs-heading-anchor" href="#Example-10:-Real-Time-Anomaly-Detection">Example 10: Real-Time Anomaly Detection</a><a id="Example-10:-Real-Time-Anomaly-Detection-1"></a><a class="docs-heading-anchor-permalink" href="#Example-10:-Real-Time-Anomaly-Detection" title="Permalink"></a></h2><p>Detect anomalies in streaming data:</p><pre><code class="language-julia hljs">using SketchySVD
+using LinearAlgebra
+using Statistics
+
+# Simulation parameters
+n_sensors = 50
+n_timesteps = 1000
+baseline_rank = 5
+
+# Generate normal data
+function generate_normal(t, n)
+    # 5 underlying patterns
+    patterns = rand(n, baseline_rank)
+    weights = [sin(2π*t/100), cos(2π*t/100), sin(2π*t/50), 
+               cos(2π*t/50), sin(2π*t/200)]
+    return patterns * weights + 0.1 * rand(n)
+end
+
+# Inject anomalies
+anomaly_times = [300, 600, 850]
+
+# Initialize sketchy 
+sketchy = init_sketchy(m=n_sensors, n=n_timesteps, r=10)
+
+reconstruction_errors = Float64[]
+is_anomaly = Bool[]
+
+for t in 1:n_timesteps
+    # Get data
+    x = generate_normal(t, n_sensors)
+    
+    # Inject anomaly
+    if t in anomaly_times
+        x += 1000 * randn(n_sensors)  # Large spike
+    end
+    
+    # Update sketch
+    increment!(sketchy, x, 1.0, 1.0)
+    
+    # Reconstruction-based anomaly detection
+    if t &gt; 50  # Wait for initialization
+        finalize!(sketchy)
+        U = sketchy.V 
+        S = sketchy.Σ
+        V = sketchy.W
+        
+        # Project onto top modes
+        r_detect = 5
+        U_trunc = U[:, 1:r_detect]
+        x_proj = U_trunc * (U_trunc&#39; * x)
+        
+        # Reconstruction error
+        error = norm(x - x_proj) / norm(x)
+        push!(reconstruction_errors, error)
+        
+        # Anomaly threshold (3 standard deviations)
+        if t &gt; 100
+            μ = mean(reconstruction_errors[1:end-1])
+            σ = std(reconstruction_errors[1:end-1])
+            push!(is_anomaly, error &gt; μ + 2.5σ || error &lt; μ - 2.5σ)
+        else
+            push!(is_anomaly, false)
+        end
+    end
+end
+
+# Visualize results
+using Plots
+times = 51:n_timesteps
+p = plot(times, reconstruction_errors, label=&quot;Reconstruction Error&quot;, 
+         ylabel=&quot;Error&quot;, xlabel=&quot;Time&quot;)
+scatter!(anomaly_times, [reconstruction_errors[t-50] for t in anomaly_times if t &gt; 50], 
+         color=:red, markersize=8, label=&quot;True Anomalies&quot;)
+
+# Mark detected anomalies
+detected = times[is_anomaly]
+if !isempty(detected)
+    scatter!(detected, reconstruction_errors[is_anomaly], 
+             color=:orange, marker=:x, markersize=10, 
+             markerstrokewidth=5,
+             label=&quot;Detected&quot;)
+end
+
+plot!(p, legend=:topleft)</code></pre><p><strong>Key insight</strong>: Anomalies have large reconstruction error when projected onto normal subspace.</p><h2 id="More-Examples"><a class="docs-heading-anchor" href="#More-Examples">More Examples</a><a id="More-Examples-1"></a><a class="docs-heading-anchor-permalink" href="#More-Examples" title="Permalink"></a></h2><p>For additional examples, see:</p><ul><li><code>scripts/random_matrix.jl</code>: Random matrix benchmarks</li><li><code>scripts/burgers.jl</code>: PDE analysis workflow</li><li><code>test/</code> directory: Comprehensive test suite with many usage patterns</li></ul><h2 id="Tips-for-Your-Application"><a class="docs-heading-anchor" href="#Tips-for-Your-Application">Tips for Your Application</a><a id="Tips-for-Your-Application-1"></a><a class="docs-heading-anchor-permalink" href="#Tips-for-Your-Application" title="Permalink"></a></h2><ol><li><strong>Start simple</strong>: Begin with <code>rsvd()</code> on a small dataset</li><li><strong>Profile</strong>: Use <code>@time</code> and <code>@benchmark</code> to identify bottlenecks</li><li><strong>Iterate</strong>: Adjust <code>r</code>, <code>T</code>, and reduction map based on results</li><li><strong>Validate</strong>: Compare with standard SVD on small test cases</li><li><strong>Monitor</strong>: Use error estimation to track quality</li></ol><h2 id="Questions?"><a class="docs-heading-anchor" href="#Questions?">Questions?</a><a id="Questions?-1"></a><a class="docs-heading-anchor-permalink" href="#Questions?" title="Permalink"></a></h2><p>If you have questions about applying SketchySVD to your specific problem, please open a discussion on <a href="https://github.com/smallpondtom/SketchySVD.jl/discussions">GitHub</a>.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../redux_maps/">« Dimension Reduction Maps</a><a class="docs-footer-nextpage" href="../api/">API Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.16.1 on <span class="colophon-date" title="Monday 24 November 2025 19:58">Monday 24 November 2025</span>. Using Julia version 1.12.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
