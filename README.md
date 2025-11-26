@@ -32,7 +32,7 @@ julia> ]
 Or in the Julia REPL package mode:
 
 ```julia
-] add https://github.com/yourusername/SketchySVD.jl
+] add https://github.com/smallpondtom/SketchySVD.jl
 ```
 
 ## Dependencies

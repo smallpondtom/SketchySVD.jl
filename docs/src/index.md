@@ -29,10 +29,10 @@ U, S, V = rsvd(A, 50)
 Process matrices **larger than available RAM** by streaming:
 ```julia
 # Matrix: 100GB, RAM: 16GB → No problem!
-sketchy = init_sketchy(100_000, 50_000, 100; ReduxMap=:sparse)
+sketchy = init_sketchy(m=100_000, n=50_000, r=100; ReduxMap=:sparse)
 for j in 1:n
     x = load_column_from_disk(j)
-    increment!(sketchy, x, j)
+    increment!(sketchy, x)
 end
 U, S, V = finalize(sketchy)
 ```
@@ -41,9 +41,9 @@ U, S, V = finalize(sketchy)
 Theoretical guarantees ensure controlled approximation error:
 ```julia
 # Error estimation built-in
-sketchy = init_sketchy(m, n, r; estimate_error=true)
+sketchy = init_sketchy(m=m, n=n, r=r; estimate_error=true)
 # ... process data ...
-U, S, V, est_err = finalize(sketchy)
+est_err, _ = finalize!(sketchy)
 println("Estimated relative error: $est_err")
 ```
 
@@ -87,12 +87,12 @@ println("Approximation error: ", norm(A - U*Diagonal(S)*V') / norm(A))
 Process data that doesn't fit in memory:
 
 ```julia
-sketchy = init_sketchy(m, n, r)  # Initialize
+sketchy = init_sketchy(m=m, n=n, r=r)  # Initialize
 for j in 1:n
     x = load_column(j)            # Get data
-    increment!(sketchy, x, j)     # Update sketch
+    increment!(sketchy, x)     # Update sketch
 end
-U, S, V = finalize(sketchy)      # Extract SVD
+finalize!(sketchy)      # Extract SVD
 ```
 
 ## Documentation Overview
@@ -130,11 +130,11 @@ U, S, V = rsvd(A, r; redux=:sparse)  # Sparse sketching
 For streaming data, use `init_sketchy()` + `increment!()` + `finalize()`:
 
 ```julia
-sketchy = init_sketchy(m, n, r; ReduxMap=:sparse, γ=0.99)
+sketchy = init_sketchy(m=m, n=n, r=r; ReduxMap=:sparse)
 for j in 1:n
     increment!(sketchy, x_j, j)
 end
-U, S, V = finalize(sketchy)
+finalize!(sketchy)
 ```
 
 **Use when**: Data arrives incrementally, memory constrained, online learning.
@@ -157,7 +157,6 @@ A = randn(m, n)
 # Initialize and compute
 sketchy = init_sketchy(m=m, n=n, r=r; method=:ssrft)
 full_increment!(sketchy, A)
-finalize!(sketchy)
 
 # Compare with exact SVD
 U_exact, Σ_exact, V_exact = svd(A)
@@ -182,7 +181,6 @@ m, n = size(A)
 r = 10
 sketchy = init_sketchy(m=m, n=n, r=r; method=:gauss)
 full_increment!(sketchy, A)
-finalize!(sketchy)
 
 # Analyze dominant modes
 println("Top 5 singular values: ", sketchy.Σ[1:5])
