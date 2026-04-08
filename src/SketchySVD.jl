@@ -21,6 +21,7 @@ include("sketchy.jl")
 include("increment.jl")
 include("finalize.jl")
 include("rsvd.jl")
+include("error.jl")
 
 export Sketchy 
 export init_sketchy, increment!, dump!, finalize!, full_increment!
