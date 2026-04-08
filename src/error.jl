@@ -46,20 +46,14 @@ The bound is:
 
 where α = 1 for real matrices, α = 0 for complex matrices.
 """
-function truncated_approx_error_bound(
-    A::AbstractMatrix, 
-    r::Int, k::Int, s::Int;
-    field::Symbol=:real
-)
+function truncated_approx_error_bound(sk::Sketchy, A::AbstractMatrix)
+    r, k, s = sk.dims[:r], sk.dims[:k], sk.dims[:s]
+    α = sk.α
 
     # Validate inputs
     @assert r >= 0 "Target rank r must be non-negative"
     @assert k > r "Range sketch size k must be greater than target rank r"
     @assert s > k "Core sketch size parameter s must be greater than k"
-    
-    # Field-dependent parameters (equation 5.1)
-    α = field == :real ? 1 : 0
-    # β = field == :real ? 1 : 2  # Not used in this bound
     
     # Additional constraint from the bound
     @assert s > k + α "Need s > k + α for the bound to be valid"
@@ -78,19 +72,16 @@ end
 Compute the error bound directly from singular values.
 """
 function truncated_approx_error_bound(
-    σ::AbstractVector{T}, 
-    r::Int, k::Int, s::Int;
-    field::Symbol=:real
+    sk::Sketchy, σ::AbstractVector{T}
 ) where T<:Real
+
+    r, k, s = sk.dims[:r], sk.dims[:k], sk.dims[:s]
+    α = sk.α
 
     # Validate inputs
     @assert r >= 0 "Target rank r must be non-negative"
     @assert k > r "Range sketch size k must be greater than target rank r"
     @assert s > k "Core sketch size parameter s must be greater than k"
-    
-    # Field-dependent parameter
-    α = field == :real ? 1 : 0
-    
     @assert s > k + α "Need s > k + α for the bound to be valid"
     @assert k > α "Need k > α for the bound to be valid"
     
