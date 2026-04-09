@@ -352,7 +352,12 @@ function full_increment!(sketchy::Sketchy{T}, X::AbstractArray{T1},
 
     # Terminate the sketchy algorithm
     if terminate
-        est_err_squared, scree = finalize!(sketchy)
+        if runtime
+            t_finalize = @elapsed est_err_squared, scree = finalize!(sketchy)
+        else
+            est_err_squared, scree = finalize!(sketchy)
+        end
+        t = runtime ? t + t_finalize : nothing
         return (est_err_squared=est_err_squared, scree=scree, runtime=t)
     else
         return (runtime=t,)  # Note the comma to make it a NamedTuple
