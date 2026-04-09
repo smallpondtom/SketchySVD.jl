@@ -12,7 +12,7 @@ For more details see [TYUC2019].
 - `V::AbstractArray{T}`: Left singular vector matrix.
 - `Σ::AbstractArray{T}`: Singular value matrix.
 - `W::AbstractArray{T}`: Right singular vector matrix.
-- `Υ::AbstractArray{T}`: Test matrix for range (k x m).
+- `Ξ::AbstractArray{T}`: Test matrix for range (k x m).
 - `Ω::AbstractArray{T}`: Test matrix for corange (k x n).
 - `Φ::AbstractArray{T}`: Test matrix for core (s x m).
 - `Ψ::AbstractArray{T}`: Test matrix for core (s x n).
@@ -20,9 +20,14 @@ For more details see [TYUC2019].
 - `X::AbstractArray{T}`: Corange sketch (k x n).
 - `Y::AbstractArray{T}`: Range sketch (m x k).
 - `Z::AbstractArray{T}`: Core sketch (s x s).
-- `W::AbstractArray{T}`: Error sketch (q x n).
-- `increment::Function`: Single step incremental update function.
-- `full_increment!::Function`: All data incremental update function.
+- `E::AbstractArray{T}`: Error sketch (q x n).
+- `ct::Integer`: Counter for the number of data streams.
+- `dims::Dict{<:Symbol,<:Integer}`: Dictionary to store dimensions of the data matrix and sketching parameters.
+- `α::Integer`: Constant depending on data type (1 for real, 0 for complex).
+- `β::Integer`: Constant depending on data type (1 for real, 2 for complex).
+- `verbose::Bool`: Flag for verbosity.
+- `ErrorEstimate::Bool`: Flag to estimate the error.
+- `SpectralDecay::Bool`: Flag to compute the scree plot.
 
 # References
 - [TYUC2019] J. A. Tropp, A. Yurtsever, M. Udell, and V. Cevher, “Streaming 
@@ -69,6 +74,30 @@ mutable struct Sketchy{T<:Number}
     SpectralDecay::Bool
 end
 
+"""
+    init_sketchy(; m, n, r, k=0, s=0, q=0, T=0, ReduxMap=:sparse, dtype="real", 
+                 verbose=false, ErrorEstimate=false, SpectralDecay=false, ζ=min(k,8))
+
+Initialize the Sketchy algorithm with the given parameters.
+
+# Arguments
+- `m`: Row size of the data matrix.
+- `n`: Column size of the data matrix.
+- `r`: Selected rank to truncate the SVD.
+- `k`: Range dimension for sketching (default: 0, will be set based on r).
+- `s`: Core dimension for sketching (default: 0, will be set based on k).
+- `q`: Error dimension for sketching (default: 0, will be set based on m).
+- `T`: Storage budget for sketching (default: 0, will be ignored if k and s are provided).
+- `ReduxMap`: Type of reduction map for sketching (default: :sparse).
+- `dtype`: Data type for the data (default: "real").
+- `verbose`: Verbosity flag (default: false).
+- `ErrorEstimate`: Flag to estimate the error (default: false).
+- `SpectralDecay`: Flag to compute the scree plot (default: false).
+- `ζ`: Sparsity parameter for sparse reduction map (default: min(k,8)).
+
+# Returns
+An instance of the `Sketchy` struct initialized with the specified parameters and random matrices.
+"""
 function init_sketchy(;
     m::Integer,                # row size of data matrix
     n::Integer,                # column size of data matrix
