@@ -357,7 +357,14 @@ function full_increment!(sketchy::Sketchy{T}, X::AbstractArray{T1},
         else
             est_err_squared, scree = finalize!(sketchy)
         end
-        t = runtime ? t + t_finalize : nothing
+
+        if runtime 
+            if typeof(t) <: Array
+                t = vcat(t, t_finalize)
+            else
+                t = t + t_finalize
+            end
+        end
         return (est_err_squared=est_err_squared, scree=scree, runtime=t)
     else
         return (runtime=t,)  # Note the comma to make it a NamedTuple
