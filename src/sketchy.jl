@@ -81,7 +81,8 @@ function init_sketchy(;
     dtype::String="real",      # data type for the data
     verbose::Bool=false,       # verbosity flag
     ErrorEstimate::Bool=false, # flag to estimate the error
-    SpectralDecay::Bool=false  # flag to compute the scree plot
+    SpectralDecay::Bool=false, # flag to compute the scree plot
+    ζ::Integer=min(k,8)        # sparsity parameter for sparse reduction map
 )
     # Initialize the iSVD algorithm
     V = zeros(m, r)
@@ -124,10 +125,10 @@ function init_sketchy(;
         Ψ = SSRFT(s, n, field=dtype)
         Θ = theta_flag ? Gauss(q, m, field=dtype) : nothing # always Gaussian
     elseif ReduxMap == :sparse
-        Ξ = Sparse(k, m, field=dtype)
-        Ω = Sparse(k, n, field=dtype)
-        Φ = Sparse(s, m, field=dtype)
-        Ψ = Sparse(s, n, field=dtype)
+        Ξ = Sparse(k, m, field=dtype, zeta=ζ)
+        Ω = Sparse(k, n, field=dtype, zeta=ζ)
+        Φ = Sparse(s, m, field=dtype, zeta=ζ)
+        Ψ = Sparse(s, n, field=dtype, zeta=ζ)
         Θ = theta_flag ? Gauss(q, m, field=dtype) : nothing # always Gaussian
     else
         error("Invalid reduction map. Available options are " *
